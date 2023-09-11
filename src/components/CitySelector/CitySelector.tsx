@@ -3,16 +3,21 @@
 import React, { useState, useEffect, useContext } from "react"
 import SelectBox from "../SelectBox/SelectBox"
 import { QueryFetchContext } from "@/context/QueryFetchContext"
+import SearchBar from "../SearchBar/SearchBar"
 import styles from "../../styles/componentStyles/citySelector.module.css"
 
 interface CitySelectorProps {
   countries: any[]
   setCountries: Function
+  countrySearch: string
+  setCountrySearch: Function
 }
 
 export default function CitySelector({
   countries: countries,
   setCountries: setCountries,
+  countrySearch: countrySearch,
+  setCountrySearch: setCountrySearch,
 }: CitySelectorProps) {
   const queryFetch = useContext(QueryFetchContext)
   const [continents, setContinents] = useState([])
@@ -44,16 +49,34 @@ export default function CitySelector({
           }
         }`
       )?.then((data) => {
-        const selectedContinentalCountries = data.data.continents.filter(
-          (continent: any) => {
-            return continent.code === selectedContinent
-          }
-        )
+        if (countrySearch === "") {
+          const selectedContinentalCountries = data.data.continents.filter(
+            (continent: any) => {
+              return continent.code === selectedContinent
+            }
+          )
 
-        setCountries(selectedContinentalCountries[0].countries)
+          setCountries(selectedContinentalCountries[0].countries)
+        } else {
+          const selectedContinentalCountries = data.data.continents.filter(
+            (continent: any) => {
+              return continent.code === selectedContinent
+            }
+          )[0].countries
+
+          const validCountries = selectedContinentalCountries.filter(
+            (country: any) => {
+              const countryName = country.name.toLowerCase().split(" ").join("")
+
+              return countryName.includes(countrySearch)
+            }
+          )
+
+          setCountries(validCountries)
+        }
       })
     }
-  }, [selectedContinent])
+  }, [selectedContinent, countrySearch])
 
   return (
     <div className={styles.city_selector_wrapper}>
@@ -61,6 +84,7 @@ export default function CitySelector({
         value={continents}
         setSelectedContinent={setSelectedContinent}
       />
+      <SearchBar setCountrySearch={setCountrySearch} />
     </div>
   )
 }

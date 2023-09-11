@@ -1,22 +1,21 @@
 "use client"
 
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import CitySelector from "@/components/CitySelector/CitySelector"
 import Country from "@/components/Country/Country"
 import styles from "../styles/pageStyles/home.module.css"
 
 export default function Home() {
   const [countries, setCountries] = useState([])
+  const [countrySearch, setCountrySearch] = useState("")
   const [selectedCountryCode, setSelectedCountryCode] = useState(null)
 
   const isSelected = (index: number) => {
     if (countries.length - 1 >= 10) {
       if (index === 9) return true
-
       return false
     } else {
       if (index === countries.length - 1) return true
-
       return false
     }
   }
@@ -24,7 +23,12 @@ export default function Home() {
   return (
     <div className={styles.homepage_wrapper}>
       <div className={styles.city_selector_container}>
-        <CitySelector countries={countries} setCountries={setCountries} />
+        <CitySelector
+          countries={countries}
+          setCountries={setCountries}
+          countrySearch={countrySearch}
+          setCountrySearch={setCountrySearch}
+        />
         <div className={styles.countries_list}>
           {countries.map((country, index) => {
             return (

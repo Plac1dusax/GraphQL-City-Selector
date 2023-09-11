@@ -1,0 +1,6 @@
+.search_bar_container {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+}
