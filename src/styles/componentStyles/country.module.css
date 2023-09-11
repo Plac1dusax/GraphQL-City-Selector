@@ -1,0 +1,34 @@
+.country,
+.country_selected {
+  padding: 0.5em 0.2em;
+
+  display: flex;
+  align-items: center;
+
+  gap: 30px;
+
+  position: relative;
+
+  cursor: pointer;
+}
+
+.country:hover {
+  color: white;
+  background-color: lightblue;
+}
+
+.country p,
+.country_selected p {
+  margin: 0;
+  pointer-events: none;
+}
+
+.country svg,
+.country_selected svg {
+  pointer-events: none;
+}
+
+.country_selected {
+  background-color: red;
+  color: white;
+}
