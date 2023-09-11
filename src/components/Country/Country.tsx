@@ -9,7 +9,7 @@ interface CountryProps {
   countryCode: string
   countryName: string
   isSelected: boolean
-  selectedCountryCode: string
+  selectedCountryCode: string | null
   setSelectedCountryCode: Function
 }
 
@@ -38,21 +38,14 @@ export default function Country({
 
     setSelectedCountry(countryCode)
     setSelectedCountryCode(countryCode)
-  }, [isSelected])
-
-  useEffect(() => {
-    if (isSelected) {
-      setSelectedCountry(countryCode)
-      setSelectedCountryCode(countryCode)
-    }
-  }, [countries])
+  }, [isSelected, countries])
 
   return (
     <div
       onClick={handleCountryClick}
       className={
         selectedCountryCode !== ""
-          ? selectedCountryCode === selectedCountry
+          ? selectedCountryCode === countryCode
             ? styles.country_selected
             : styles.country
           : styles.country
@@ -60,7 +53,7 @@ export default function Country({
     >
       <p>{countryName}</p>
       {selectedCountry !== "" ? (
-        selectedCountryCode === selectedCountry ? (
+        selectedCountryCode === countryCode ? (
           <AiOutlineCheck />
         ) : null
       ) : null}
