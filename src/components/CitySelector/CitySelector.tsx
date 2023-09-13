@@ -3,7 +3,6 @@
 import React, { useState, useEffect, useContext } from "react"
 import SelectBox from "../SelectBox/SelectBox"
 import { QueryFetchContext } from "@/context/QueryFetchContext"
-import { SelectedContinentContext } from "@/context/SelectedContinentContext"
 import SearchBar from "../SearchBar/SearchBar"
 import styles from "../../styles/componentStyles/citySelector.module.css"
 
@@ -21,10 +20,9 @@ export default function CitySelector({
   setCountrySearch: setCountrySearch,
 }: CitySelectorProps) {
   const queryFetch = useContext(QueryFetchContext)
-  const { selectedContinent, setSelectedContinent } = useContext(
-    SelectedContinentContext
-  )
+
   const [continents, setContinents] = useState([])
+  const [selectedContinent, setSelectedContinent] = useState("")
 
   useEffect(() => {
     if (queryFetch) {
