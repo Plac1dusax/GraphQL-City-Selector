@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import QueryFetchProvider from "@/context/QueryFetchContext"
+import SelectedContinentProvider from "@/context/SelectedContinentContext"
 import "../styles/globals.css"
 
 const inter = Inter({ subsets: ["latin"] })
@@ -16,10 +17,12 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <QueryFetchProvider>
-      <html lang="en">
-        <body className={inter.className}>{children}</body>
-      </html>
-    </QueryFetchProvider>
+    <SelectedContinentProvider>
+      <QueryFetchProvider>
+        <html lang="en">
+          <body className={inter.className}>{children}</body>
+        </html>
+      </QueryFetchProvider>
+    </SelectedContinentProvider>
   )
 }
