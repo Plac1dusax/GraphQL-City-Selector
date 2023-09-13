@@ -43,9 +43,16 @@ export default function Country({
   useEffect(() => {
     if (!isSelected) return
 
-    countryName === "U.S. Minor Outlying Islands"
-      ? setSelectedCountryName("Minor_Outlying_Islands")
-      : setSelectedCountryName(countryName.replace(/ /g, "_"))
+    switch (countryName) {
+      case "U.S. Minor Outlying Islands":
+        setSelectedCountryName("Minor_Outlying_Islands")
+        break
+      case "Cocos [Keeling] Islands":
+        setSelectedCountryName("Cocos (Keeling) Islands")
+        break
+      default:
+        setSelectedCountryName(countryName)
+    }
 
     setSelectedCountry(countryCode)
     setSelectedCountryCode(countryCode)
