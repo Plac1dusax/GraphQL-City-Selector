@@ -1,8 +1,7 @@
 "use client"
 
-import React, { useState, useEffect, useContext } from "react"
+import React, { useState, useEffect } from "react"
 import { useSearchParams } from "../../../node_modules/next/navigation"
-import { SelectedContinentContext } from "@/context/SelectedContinentContext"
 import { ReactBingmaps } from "react-bingmaps"
 
 const KEY = "AjESHK1fkVQuRadCk6RuUCt9i4-9U0Qj6a3B-TuN8wSj1HniQMtNOJEwM0Oe94a5"
@@ -10,13 +9,8 @@ const KEY = "AjESHK1fkVQuRadCk6RuUCt9i4-9U0Qj6a3B-TuN8wSj1HniQMtNOJEwM0Oe94a5"
 export default function Map() {
   const [searchedCountry, setSearchedCountry] = useState<string>(null)
   const [countryCoordinates, setCountryCoordinates] = useState<object>()
-  const [countryCapitalCoordinates, setCountryCapitalCoordinates] =
-    useState<object>()
 
   const searchedCountryCode = useSearchParams().get("countryCode")
-  const { selectedContinent, setSelectedContinent } = useContext(
-    SelectedContinentContext
-  )
 
   useEffect(() => {
     if (searchedCountryCode) {
@@ -25,7 +19,7 @@ export default function Map() {
   }, [])
 
   useEffect(() => {
-    const countryInformation = fetch(
+    fetch(
       `https://nominatim.openstreetmap.org/search?format=json&q=${searchedCountryCode}`
     )
       .then((data) => {
@@ -35,7 +29,6 @@ export default function Map() {
         const validLocation =
           locations.length > 1
             ? locations.filter((location) => {
-                console.log(location)
                 return (
                   location.addresstype === "country" ||
                   location.addresstype === "territory" ||
@@ -50,18 +43,6 @@ export default function Map() {
         setCountryCoordinates({
           center: [validLocation.lat, validLocation.lon],
         })
-      })
-  }, [searchedCountry])
-
-  useEffect(() => {
-    fetch(
-      `https://nominatim.openstreetmap.org/search?format=json&q=capital+of+${searchedCountry}`
-    )
-      .then((data) => {
-        return data.json()
-      })
-      .then((locations) => {
-        console.log(locations)
       })
   }, [searchedCountry])
 

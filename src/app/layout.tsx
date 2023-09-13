@@ -17,12 +17,10 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <SelectedContinentProvider>
-      <QueryFetchProvider>
-        <html lang="en">
-          <body className={inter.className}>{children}</body>
-        </html>
-      </QueryFetchProvider>
-    </SelectedContinentProvider>
+    <QueryFetchProvider>
+      <html lang="en">
+        <body className={inter.className}>{children}</body>
+      </html>
+    </QueryFetchProvider>
   )
 }
