@@ -2,6 +2,8 @@
 
 import React, { useState, useEffect } from "react"
 import { AiOutlineCheck } from "react-icons/ai"
+import { BiWorld } from "react-icons/bi"
+import Link from "../../../node_modules/next/link"
 import styles from "../../styles/componentStyles/country.module.css"
 
 interface CountryProps {
@@ -22,12 +24,17 @@ export default function Country({
   setSelectedCountryCode: setSelectedCountryCode,
 }: CountryProps) {
   const [selectedCountry, setSelectedCountry] = useState(countryCode)
+  const [selectedCountryName, setSelectedCountryName] = useState("")
 
   function handleCountryClick() {
     if (selectedCountry === selectedCountryCode) {
       setSelectedCountryCode(null)
       setSelectedCountry("")
     } else {
+      countryName === "U.S. Minor Outlying Islands"
+        ? setSelectedCountryName("Minor_Outlying_Islands")
+        : setSelectedCountryName(countryName.replace(/ /g, "_"))
+
       setSelectedCountryCode(countryCode)
       setSelectedCountry(countryCode)
     }
@@ -35,6 +42,10 @@ export default function Country({
 
   useEffect(() => {
     if (!isSelected) return
+
+    countryName === "U.S. Minor Outlying Islands"
+      ? setSelectedCountryName("Minor_Outlying_Islands")
+      : setSelectedCountryName(countryName.replace(/ /g, "_"))
 
     setSelectedCountry(countryCode)
     setSelectedCountryCode(countryCode)
@@ -55,6 +66,13 @@ export default function Country({
       {selectedCountry !== "" ? (
         selectedCountryCode === countryCode ? (
           <AiOutlineCheck />
+        ) : null
+      ) : null}
+      {selectedCountry !== "" ? (
+        selectedCountryCode === countryCode ? (
+          <Link href={`/map?countryCode=${selectedCountryName}`}>
+            <BiWorld />
+          </Link>
         ) : null
       ) : null}
     </div>
