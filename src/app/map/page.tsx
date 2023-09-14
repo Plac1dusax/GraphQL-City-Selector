@@ -50,6 +50,7 @@ export default function Map() {
   }, [searchedCountry])
 
   useEffect(() => {
+    console.log(searchedCountryCode)
     fetch(
       `https://restcountries.com/v3.1/name/${searchedCountryCode
         ?.replace(/_/g, " ")
@@ -60,7 +61,15 @@ export default function Map() {
         return data.json()
       })
       .then((countryData) => {
-        setCountryInformation(countryData[0])
+        if (countryData.length > 1) {
+          const independentCountry = countryData.find((data) => {
+            return data.independent
+          })
+
+          setCountryInformation(independentCountry)
+        } else {
+          setCountryInformation(countryData[0])
+        }
       })
   }, [searchedCountry])
 

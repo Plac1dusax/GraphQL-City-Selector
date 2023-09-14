@@ -26,7 +26,9 @@ export default function Country({
   const [selectedCountry, setSelectedCountry] = useState(countryCode)
   const [selectedCountryName, setSelectedCountryName] = useState("")
 
-  function handleCountryClick() {
+  function handleCountryClick(e: any) {
+    if (e.target.matches("a")) return
+
     if (selectedCountry === selectedCountryCode) {
       setSelectedCountryCode(null)
       setSelectedCountry("")
@@ -77,7 +79,11 @@ export default function Country({
       ) : null}
       {selectedCountry !== "" ? (
         selectedCountryCode === countryCode ? (
-          <Link href={`/map?countryCode=${selectedCountryName}`}>
+          <Link
+            className={styles.map_button}
+            href={`/map?countryCode=${selectedCountryName}`}
+            target="_blank"
+          >
             <BiWorld />
           </Link>
         ) : null

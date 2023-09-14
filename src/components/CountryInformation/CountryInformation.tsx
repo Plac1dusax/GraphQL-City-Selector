@@ -18,6 +18,8 @@ export default function CountryInformation({
     countryInformation.population
   )
 
+  const languages = Object?.values?.(countryInformation?.languages)
+
   function handleCountryInformation() {
     setCountryInformationActive(!countryInformationActive)
   }
@@ -31,13 +33,17 @@ export default function CountryInformation({
           : styles.country_information_wrapper
       }
     >
-      <div className={styles.arrow}>
+      <div
+        className={
+          countryInformationActive ? styles.arrow_active : styles.arrow
+        }
+      >
         <BiSolidUpArrow />
       </div>
       <div className={styles.country_information_container}>
-        <div className={styles.country_header}>
+        <h2 className={styles.country_header}>
           {countryInformation?.name.official}
-        </div>
+        </h2>
         <div className={styles.country_flag}>
           <Image
             src={countryInformation?.flags.png}
@@ -45,31 +51,39 @@ export default function CountryInformation({
             fill
           />
         </div>
-        <div className={styles.county_informations}>
+        <div className={styles.county_information_list}>
           <div className={styles.country_information}>
-            <div className={styles.country_information_header}>Capital:</div>
+            <h3 className={styles.country_information_header}>Capital:</h3>
             <div className={styles.country_information_value}>
-              {countryInformation.capital.map((capital) => {
-                return <p>{capital}</p>
+              {countryInformation?.capital?.map((capital) => {
+                return <span>{capital}</span>
               })}
             </div>
           </div>
           <div className={styles.country_information}>
-            <div className={styles.country_information_header}>Region:</div>
+            <h3 className={styles.country_information_header}>Region:</h3>
             <div className={styles.country_information_value}>
-              {countryInformation.region}
+              {countryInformation?.region}
             </div>
           </div>
-          <div className={styles.country_information}>
-            <div className={styles.country_information_header}>Languages:</div>
-            <div className={styles.country_information_value}>
-              {Object.values(countryInformation.languages).map((language) => {
-                return <p>{language}</p>
-              })}
+          {countryInformation.languages ? (
+            <div className={styles.country_information}>
+              <h3 className={styles.country_information_header}>Languages:</h3>
+              <div className={styles.country_information_value}>
+                {languages.map((language, index) => {
+                  return (
+                    <span>
+                      {index === languages.length - 1
+                        ? language
+                        : `${language},`}
+                    </span>
+                  )
+                })}
+              </div>
             </div>
-          </div>
+          ) : null}
           <div className={styles.country_information}>
-            <div className={styles.country_information_header}>Population:</div>
+            <h3 className={styles.country_information_header}>Population:</h3>
             <div className={styles.country_information_value}>
               {formattedPopulation}
             </div>

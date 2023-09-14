@@ -37,16 +37,19 @@ export default function SelectBox({
   }, [value])
 
   return (
+  <div className={styles.select_box_wrapper}>
+    <label htmlFor="continent" className={styles.select_box_header}>Continent:</label>
     <select
       ref={selectBoxRef}
       onChange={handleContinentClick}
-      className={styles.select_box_wrapper}
-    >
+      className={styles.select_box}
+      >
       {value.map((value, index) => {
         return (
           <SelectOption key={index} code={value.code} option={value.name} />
-        )
-      })}
+          )
+        })}
     </select>
+        </div>
   )
 }

@@ -1,0 +1,7 @@
+.select_option {
+  font-family: var(--font-primary), sans-serif;
+}
+
+.select_option:hover {
+  cursor: pointer;
+}
