@@ -50,7 +50,6 @@ export default function Map() {
   }, [searchedCountry])
 
   useEffect(() => {
-    console.log(searchedCountryCode)
     fetch(
       `https://restcountries.com/v3.1/name/${searchedCountryCode
         ?.replace(/_/g, " ")
