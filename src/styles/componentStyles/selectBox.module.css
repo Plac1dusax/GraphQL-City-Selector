@@ -19,3 +19,29 @@
 
   font-size: 18px;
 }
+
+@media all and (max-width: 1024px) {
+  .select_box {
+    width: 100px;
+    height: 20px;
+
+    font-size: 14px;
+  }
+
+  .select_box_header {
+    font-size: 16px;
+  }
+}
+
+@media all and (max-width: 840px) {
+  .select_box {
+    width: 80px;
+    height: 16px;
+
+    font-size: 10px;
+  }
+
+  .select_box_header {
+    font-size: 16px;
+  }
+}

@@ -10,6 +10,8 @@
 
   transform: translateX(-50%);
 
+  z-index: 1000;
+
   overflow: hidden;
 
   transition: bottom 0.3s ease-in-out;
@@ -120,4 +122,11 @@
 
   display: flex;
   gap: 5px;
+}
+
+@media all and (max-width: 560px) {
+  .country_information_container {
+    width: 240px;
+    height: 540px;
+  }
 }
