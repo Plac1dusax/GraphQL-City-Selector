@@ -13,7 +13,7 @@ export default function SelectBox({
   value: value,
   setSelectedContinent: setSelectedContinent,
 }: SelectBoxProps) {
-  const selectBoxRef = useRef(null)
+  const selectBoxRef = useRef<any>(null)
 
   function handleContinentClick(e: any) {
     const selectedContinent = e.target.value.toLowerCase().split(" ").join("")
@@ -29,7 +29,7 @@ export default function SelectBox({
   useEffect(() => {
     if (selectBoxRef.current) {
       const defaultContinent = value.filter((continent) => {
-        return continent.name === selectBoxRef.current.value
+        return continent.name === selectBoxRef?.current?.value
       })
 
       setSelectedContinent(defaultContinent[0]?.code)
@@ -37,19 +37,21 @@ export default function SelectBox({
   }, [value])
 
   return (
-  <div className={styles.select_box_wrapper}>
-    <label htmlFor="continent" className={styles.select_box_header}>Continent:</label>
-    <select
-      ref={selectBoxRef}
-      onChange={handleContinentClick}
-      className={styles.select_box}
+    <div className={styles.select_box_wrapper}>
+      <label htmlFor="continent" className={styles.select_box_header}>
+        Continent:
+      </label>
+      <select
+        ref={selectBoxRef}
+        onChange={handleContinentClick}
+        className={styles.select_box}
       >
-      {value.map((value, index) => {
-        return (
-          <SelectOption key={index} code={value.code} option={value.name} />
+        {value.map((value, index) => {
+          return (
+            <SelectOption key={index} code={value.code} option={value.name} />
           )
         })}
-    </select>
-        </div>
+      </select>
+    </div>
   )
 }

@@ -5,13 +5,9 @@ import Image from "../../../node_modules/next/image"
 import { BiSolidUpArrow } from "react-icons/bi"
 import styles from "../../styles/componentStyles/countryInformation.module.css"
 
-interface CountryInformationProps {
-  countryInformation: object
-}
-
 export default function CountryInformation({
   countryInformation: countryInformation,
-}: CountryInformationProps) {
+}) {
   const [countryInformationActive, setCountryInformationActive] = useState(true)
 
   const formattedPopulation = new Intl.NumberFormat("tr-TR").format(
@@ -55,8 +51,8 @@ export default function CountryInformation({
           <div className={styles.country_information}>
             <h3 className={styles.country_information_header}>Capital:</h3>
             <div className={styles.country_information_value}>
-              {countryInformation?.capital?.map((capital) => {
-                return <span>{capital}</span>
+              {countryInformation?.capital?.map((capital, index) => {
+                return <span key={index}>{capital}</span>
               })}
             </div>
           </div>
@@ -70,9 +66,9 @@ export default function CountryInformation({
             <div className={styles.country_information}>
               <h3 className={styles.country_information_header}>Languages:</h3>
               <div className={styles.country_information_value}>
-                {languages.map((language, index) => {
+                {languages.map((language: any, index: number) => {
                   return (
-                    <span>
+                    <span key={index}>
                       {index === languages.length - 1
                         ? language
                         : `${language},`}

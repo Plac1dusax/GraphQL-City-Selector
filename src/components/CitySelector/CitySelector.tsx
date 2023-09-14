@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useContext } from "react"
 import SelectBox from "../SelectBox/SelectBox"
 import { QueryFetchContext } from "@/context/QueryFetchContext"
-import SearchBar from "../SearchBar/SearchBar"
+import SearchBar from "../SearchBar/Searchbar"
 import styles from "../../styles/componentStyles/citySelector.module.css"
 
 interface CitySelectorProps {
@@ -14,7 +14,6 @@ interface CitySelectorProps {
 }
 
 export default function CitySelector({
-  countries: countries,
   setCountries: setCountries,
   countrySearch: countrySearch,
   setCountrySearch: setCountrySearch,
