@@ -76,7 +76,13 @@ export default function Country({
             ? styles.country_selected
             : styles.country
           : styles.country
-      } ${previousSelectedCountry === countryCode ? styles.previous : null}`}
+      } ${
+        selectedCountryCode !== countryCode
+          ? previousSelectedCountry === countryCode
+            ? styles.previous
+            : null
+          : null
+      }`}
     >
       <p>{countryName}</p>
       {selectedCountry !== "" ? (
