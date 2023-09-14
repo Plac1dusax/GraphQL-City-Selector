@@ -31,7 +31,7 @@ export default function Home() {
           setCountrySearch={setCountrySearch}
         />
         <div className={styles.countries_list}>
-          {countries.map((country, index) => {
+          {countries.map((country: any, index) => {
             return (
               <Country
                 key={index}

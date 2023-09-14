@@ -8,10 +8,28 @@ import styles from "../../styles/pageStyles/map.module.css"
 
 const KEY = "AjESHK1fkVQuRadCk6RuUCt9i4-9U0Qj6a3B-TuN8wSj1HniQMtNOJEwM0Oe94a5"
 
+interface CountryInformationProps {
+  countryInformation: {
+    population: number
+    languages: object
+    name: {
+      official: string
+    }
+    capital: any[]
+    flags: {
+      png: string
+      alt: string
+    }
+  }
+}
+
+type Coordinates = any[]
+
 export default function Map() {
-  const [searchedCountry, setSearchedCountry] = useState<string>(null)
-  const [countryCoordinates, setCountryCoordinates] = useState<object>()
-  const [countryInformation, setCountryInformation] = useState<object>()
+  const [searchedCountry, setSearchedCountry] = useState<string | null>(null)
+  const [countryCoordinates, setCountryCoordinates] = useState<Coordinates>()
+  const [countryInformation, setCountryInformation] =
+    useState<CountryInformationProps>()
 
   const searchedCountryCode = useSearchParams().get("countryCode")
 
@@ -43,9 +61,7 @@ export default function Map() {
               })[0]
             : locations[0]
 
-        setCountryCoordinates({
-          center: [validLocation.lat, validLocation.lon],
-        })
+        setCountryCoordinates([validLocation.lat, validLocation.lon])
       })
   }, [searchedCountry])
 
@@ -77,7 +93,7 @@ export default function Map() {
       {countryCoordinates ? (
         <ReactBingmaps
           bingmapKey={KEY}
-          center={countryCoordinates.center}
+          center={countryCoordinates}
           zoom={6}
           disableLocateMeButton={true}
         >
