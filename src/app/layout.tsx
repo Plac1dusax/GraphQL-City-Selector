@@ -1,10 +1,21 @@
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import QueryFetchProvider from "@/context/QueryFetchContext"
-import SelectedContinentProvider from "@/context/SelectedContinentContext"
+import { Manrope } from "next/font/google"
+import { Barlow_Condensed } from "next/font/google"
 import "../styles/globals.css"
 
-const inter = Inter({ subsets: ["latin"] })
+const manrope = Manrope({
+  subsets: ["latin"],
+  variable: "--header-primary",
+  weight: "700",
+})
+
+const barlowCondensed = Barlow_Condensed({
+  subsets: ["latin"],
+  variable: "--font-primary",
+  weight: "600",
+})
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -19,7 +30,9 @@ export default function RootLayout({
   return (
     <QueryFetchProvider>
       <html lang="en">
-        <body className={inter.className}>{children}</body>
+        <body className={`${manrope.className} ${barlowCondensed.className}`}>
+          {children}
+        </body>
       </html>
     </QueryFetchProvider>
   )

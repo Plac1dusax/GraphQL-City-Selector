@@ -5,7 +5,13 @@
   display: flex;
   align-items: center;
 
+  height: 40px;
+
   gap: 30px;
+
+  font-family: var(--font-primary);
+
+  transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
 
   position: relative;
 
@@ -14,7 +20,7 @@
 
 .country:hover {
   color: white;
-  background-color: lightblue;
+  background-color: rgba(0, 0, 0, 0.6);
 }
 
 .country p,
@@ -29,6 +35,30 @@
 }
 
 .country_selected {
-  background-color: red;
+  background-color: rgba(0, 0, 0, 0.9);
+  color: white;
+}
+
+.map_button {
+  background-color: #1e3548;
+
+  border: 1px solid white;
+  border-radius: 0.3em;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 42px;
+  height: 30px;
+}
+
+.map_button:hover {
+  background-color: #0074e4;
+}
+
+.map_button svg {
+  pointer-events: none;
+
   color: white;
 }

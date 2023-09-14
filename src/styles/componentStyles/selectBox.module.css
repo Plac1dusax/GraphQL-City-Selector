@@ -1,7 +1,20 @@
 .select_box_wrapper {
-  width: 200px;
-  height: 50px;
+  display: flex;
+  align-items: center;
 
+  gap: 10px;
+}
+
+.select_box_header {
+  font-family: var(--header-primary), sans-serif;
+  color: white;
+}
+
+.select_box {
+  width: 150px;
+  height: 30px;
+
+  font-family: var(--header-primary), sans-serif;
   border-radius: 0.3em;
 
   font-size: 18px;
