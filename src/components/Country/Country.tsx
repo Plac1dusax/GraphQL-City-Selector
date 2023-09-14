@@ -13,6 +13,8 @@ interface CountryProps {
   isSelected: boolean
   selectedCountryCode: string | null
   setSelectedCountryCode: Function
+  previousSelectedCountry: string
+  setPreviousSelectedCountry: Function
 }
 
 export default function Country({
@@ -22,6 +24,8 @@ export default function Country({
   isSelected: isSelected,
   selectedCountryCode: selectedCountryCode,
   setSelectedCountryCode: setSelectedCountryCode,
+  previousSelectedCountry: previousSelectedCountry,
+  setPreviousSelectedCountry: setPreviousSelectedCountry,
 }: CountryProps) {
   const [selectedCountry, setSelectedCountry] = useState(countryCode)
   const [selectedCountryName, setSelectedCountryName] = useState("")
@@ -30,6 +34,7 @@ export default function Country({
     if (e.target.matches("a")) return
 
     if (selectedCountry === selectedCountryCode) {
+      setPreviousSelectedCountry(selectedCountryCode)
       setSelectedCountryCode(null)
       setSelectedCountry("")
     } else {
@@ -37,6 +42,7 @@ export default function Country({
         ? setSelectedCountryName("Minor_Outlying_Islands")
         : setSelectedCountryName(countryName.replace(/ /g, "_"))
 
+      setPreviousSelectedCountry(selectedCountryCode)
       setSelectedCountryCode(countryCode)
       setSelectedCountry(countryCode)
     }
@@ -56,6 +62,7 @@ export default function Country({
         setSelectedCountryName(countryName)
     }
 
+    setPreviousSelectedCountry(selectedCountryCode)
     setSelectedCountry(countryCode)
     setSelectedCountryCode(countryCode)
   }, [isSelected, countries])
@@ -63,13 +70,13 @@ export default function Country({
   return (
     <div
       onClick={handleCountryClick}
-      className={
+      className={`${
         selectedCountryCode !== ""
           ? selectedCountryCode === countryCode
             ? styles.country_selected
             : styles.country
           : styles.country
-      }
+      } ${previousSelectedCountry === countryCode ? styles.previous : null}`}
     >
       <p>{countryName}</p>
       {selectedCountry !== "" ? (

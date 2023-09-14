@@ -9,6 +9,7 @@ export default function Home() {
   const [countries, setCountries] = useState([])
   const [countrySearch, setCountrySearch] = useState("")
   const [selectedCountryCode, setSelectedCountryCode] = useState(null)
+  const [previousSelectedCountry, setPreviousSelectedCountry] = useState("")
 
   const isSelected = (index: number) => {
     if (countries.length - 1 >= 10) {
@@ -40,6 +41,8 @@ export default function Home() {
                 isSelected={isSelected(index)}
                 selectedCountryCode={selectedCountryCode}
                 setSelectedCountryCode={setSelectedCountryCode}
+                previousSelectedCountry={previousSelectedCountry}
+                setPreviousSelectedCountry={setPreviousSelectedCountry}
               />
             )
           })}
